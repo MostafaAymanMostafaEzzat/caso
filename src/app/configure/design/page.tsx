@@ -1,6 +1,4 @@
-// import { db } from "@/db";
-// import DesignOflient from "./design";
-// import { notFound, useSearchParams } from "next/navigation";
+
 
 
 // interface PageProps {
