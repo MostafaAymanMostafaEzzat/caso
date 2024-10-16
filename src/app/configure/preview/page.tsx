@@ -7,7 +7,7 @@ import { db } from "@/db"
 //         [key:string]:string | string[] |undefined
 //     }
 // }
-{searchParams}:PageProps
+// {searchParams}:PageProps
  export default async function(){
     
     // const {id} =searchParams
