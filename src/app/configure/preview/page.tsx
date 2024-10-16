@@ -1,37 +1,38 @@
+import { notFound } from "next/navigation"
+import DesignPreview from "./DesignPreview"
+import { db } from "@/db"
 
-
-// interface PageProps {
-//     searchParams:{
-//         [key:string]:string | string[] |undefined
-//     }
-// }
-// {searchParams}:PageProps
- export default async function(){
+interface PageProps {
+    searchParams:{
+        [key:string]:string | string[] |undefined
+    }
+}
+ 
+ export default async function({searchParams}:PageProps){
     
-    // const {id} =searchParams
+    const {id} =searchParams
 
-    // if (!id || typeof id !== 'string') {
-    //     return notFound()
-    //   }
+    if (!id || typeof id !== 'string') {
+        return notFound()
+      }
     
-    // const userConfig =await db.configuration.findFirst({
-    //     where:{
-    //         id : id,
+    const userConfig =await db.configuration.findFirst({
+        where:{
+            id : id,
 
-    //     }
-    // }
-    // )
-    // if (!userConfig ) {
-    //     return notFound()
-    //   }
+        }
+    }
+    )
+    if (!userConfig ) {
+        return notFound()
+      }
 
-    //   const {color,croppedImageUrl,finish,material,id:ConfigID}=userConfig
-    //   if ( !croppedImageUrl || !finish || !color || !material) {
-    //     return notFound()
-    //   }
+      const {color,croppedImageUrl,finish,material,id:ConfigID}=userConfig
+      if ( !croppedImageUrl || !finish || !color || !material) {
+        return notFound()
+      }
 
     return(
-       <>ggggggggggg</>
+        <DesignPreview color={color} croppedImageUrl={croppedImageUrl} finish={finish} material={material} ConfigId={ConfigID} />
     )
  }
-//  <DesignPreview color={color} croppedImageUrl={croppedImageUrl} finish={finish} material={material} ConfigId={ConfigID} />
