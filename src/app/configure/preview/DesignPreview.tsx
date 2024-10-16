@@ -33,21 +33,16 @@ export default function DesignPreview({
   const {mutate,isPending} = useMutation({
     mutationKey : ['mustataConfigureOnPreview'],
     mutationFn : async ()=>{
-      console.log('start')
-      await creatSession({ConfigID:ConfigId})
-      console.log('done')
+     return(await creatSession({ConfigID:ConfigId}))
     },
-    onSuccess : (data)=>{
-      console.log(data)
-      // if(url) router.push(url)
-      // else throw new Error('Unable to retrieve payment URL.')
+    onSuccess :async ({url})=>{
+      if(url) router.push(url)
+      else throw new Error('Unable to retrieve payment URL.')
     },
     onError: () => {
-      console.log('hhhhhhhhhhhhhhh')
+      console.log('error')
     },
-    onMutate:()=>{
-      console.log('ooooooooooooooooooo')
-    }
+
   })
 
 

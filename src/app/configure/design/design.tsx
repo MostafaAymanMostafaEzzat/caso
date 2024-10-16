@@ -261,6 +261,7 @@ export default function DesignOflient({
                         onSelect={(value) => {
                           setOptions((prev) => ({ ...prev, model }));
                         }}
+                        key={model.value}
                       >
                         <Check
                           className={cn("w-4 h-4 mr-2  ", {

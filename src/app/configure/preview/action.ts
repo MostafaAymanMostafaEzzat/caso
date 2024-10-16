@@ -1,9 +1,12 @@
 "use server";
 
+import OrderReceivedEmail from "@/components/emails/OrderReceivedEmail";
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
 import { db } from "@/db";
 import { stripe } from "@/lib/stripe";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Resend } from "resend";
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function creatSession({ ConfigID }: { ConfigID: string }) {
   const configuration = await db.configuration.findUnique({
@@ -40,7 +43,6 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
     })
   }
 
-  console.log('actionnnnnnnnnnnnnnn')
   const product = await stripe.products.create({
     name:'Custom iPhone Case',
     images:[configuration.imageUrl],
@@ -49,6 +51,8 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
         unit_amount: price
     }
   });
+
+
 
   const session = await stripe.checkout.sessions.create({
     line_items:[
@@ -67,7 +71,26 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
     success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?orderId=${Order.id}`,
     cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/configure/preview?id=${configuration.id}`,
   })
-  console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 
+  const { data, error } = await resend.emails.send({
+    from: 'caso <es-Moustafa.Ezzat2026@alexu.edu.eg>',
+    to: ['mostafaaymna6@gmail.com'],
+    subject: 'Thanks for your order!',
+    react: OrderReceivedEmail({
+        Order,
+        orderDate: '2022/3/22',
+        // @ts-ignore
+        shippingAddress: {
+          name: 'session.customer_details!.name!',
+          city: 'ShippingAddress!.city!',
+          country: 'ShippingAddress!.country!',
+          postalCode: 'ShippingAddress!.postal_code!',
+          street: 'ShippingAddress!.line1!',
+          state: 'ShippingAddress!.state',
+        },
+      }),
+
+
+    })
   return { url: session.url }
 }
