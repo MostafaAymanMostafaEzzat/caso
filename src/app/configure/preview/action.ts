@@ -1,6 +1,4 @@
 "use server";
-
-import OrderReceivedEmail from "@/components/emails/OrderReceivedEmail";
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
 import { db } from "@/db";
 import { stripe } from "@/lib/stripe";
@@ -72,25 +70,5 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
     cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/configure/preview?id=${configuration.id}`,
   })
 
-  const { data, error } = await resend.emails.send({
-    from: 'caso <es-Moustafa.Ezzat2026@alexu.edu.eg>',
-    to: ['mostafaaymna6@gmail.com'],
-    subject: 'Thanks for your order!',
-    react: OrderReceivedEmail({
-        Order,
-        orderDate: '2022/3/22',
-        // @ts-ignore
-        shippingAddress: {
-          name: 'session.customer_details!.name!',
-          city: 'ShippingAddress!.city!',
-          country: 'ShippingAddress!.country!',
-          postalCode: 'ShippingAddress!.postal_code!',
-          street: 'ShippingAddress!.line1!',
-          state: 'ShippingAddress!.state',
-        },
-      }),
-
-
-    })
   return { url: session.url }
 }
