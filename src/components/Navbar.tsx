@@ -3,7 +3,7 @@ import MaxWidthWithWrapper from "./MaxwidthWithWrapper";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./button";
 import { ArrowRight } from "lucide-react";
-
+import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default async function Navbar() {
@@ -44,18 +44,9 @@ export default async function Navbar() {
             ) : (
               <div className="flex items-center gap-2">
                 {" "}
-                <Link
-                  className={cn(buttonVariants({ variant: "ghost" }))}
-                  href="/api/auth/register"
-                >
-                  Sign up
-                </Link>
-                <Link
-                  className={cn(buttonVariants({ variant: "ghost" }))}
-                  href="/api/auth/login"
-                >
-                  login
-                </Link>
+                <RegisterLink>register</RegisterLink>
+
+                <LoginLink>login</LoginLink>
               </div>
             )}
             <div className="text-center  relative ml-4">
