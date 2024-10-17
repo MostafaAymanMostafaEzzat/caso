@@ -23,7 +23,12 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
   const user = await getUser();
   const { finish, material } = configuration;
   console.log('helooo 4')
+  if (!user) {
+    throw new Error('You need to be logged in')
+  }
   console.log(user)
+  console.log('kkkkkkkkkkkkkkkkkkkkkkk')
+  console.log(getUser)
 
   let price = BASE_PRICE;
   if (finish === "textured") price += PRODUCT_PRICES.finish.textured;
