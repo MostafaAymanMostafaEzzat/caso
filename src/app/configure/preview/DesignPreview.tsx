@@ -33,6 +33,7 @@ export default function DesignPreview({
   const {mutate,isPending} = useMutation({
     mutationKey : ['mustataConfigureOnPreview'],
     mutationFn : async ()=>{
+      console.log('helooo')
      return(await creatSession({ConfigID:ConfigId}))
     },
     onSuccess :async ({url})=>{
