@@ -39,8 +39,8 @@ export default function DesignPreview({
       if(url) router.push(url)
       else throw new Error('Unable to retrieve payment URL.')
     },
-    onError: () => {
-      console.log('error')
+    onError: (error) => {
+      console.log(error)
     },
 
   })
