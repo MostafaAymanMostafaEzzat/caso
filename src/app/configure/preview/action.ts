@@ -7,22 +7,28 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function creatSession({ ConfigID }: { ConfigID: string }) {
+    console.log('helooo 1')
+
   const configuration = await db.configuration.findUnique({
     where: { id: ConfigID },
   });
+  console.log('helooo 2')
 
   if (!configuration) {
     throw new Error("No such configuration found");
   }
+  console.log('helooo 3')
 
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const { finish, material } = configuration;
+  console.log('helooo 4')
 
   let price = BASE_PRICE;
   if (finish === "textured") price += PRODUCT_PRICES.finish.textured;
   if (material === "polycarbonate")
     price += PRODUCT_PRICES.material.polycarbonate;
+  console.log('helooo 5')
 
   let Order = await db.order.findFirst({
     where: {
@@ -30,6 +36,7 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
       userId: user.id,
     },
   });
+  console.log('helooo 6')
 
   if(!Order){
     Order = await db.order.create({
@@ -40,6 +47,7 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
         }
     })
   }
+  console.log('helooo 7')
 
   const product = await stripe.products.create({
     name:'Custom iPhone Case',
@@ -49,6 +57,7 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
         unit_amount: price
     }
   });
+  console.log('helooo 8')
 
 
   console.log('start session')
