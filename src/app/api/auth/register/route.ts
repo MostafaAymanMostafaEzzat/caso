@@ -4,11 +4,12 @@ import { notFound } from "next/navigation";
 
 import crypto from 'crypto'
 import { Resend } from "resend";
+import { NextRequest, NextResponse } from "next/server";
 const bcrypt = require('bcrypt');
 
-export async function POST(req:Request) {
+export async function POST(req:Request) :Promise<Response>{
   let i= 0
-  
+
   console.log(i++)
   const resend = new Resend(process.env.RESEND_API_KEY);
   console.log(i++)
@@ -25,7 +26,7 @@ console.log(i++)
 console.log(i++)
 
   if(!email || !name || !password){
-    return new Error('please provide email and name and password')
+    throw new Error('please provide email and name and password')
   }
 console.log(i++)
  
@@ -88,7 +89,7 @@ console.log(i++)
 //save the verificationToken to the user
 // user.verificationToken=verificationToken
 
-  return Response.json({msg:'Email Verified'},{status:201})
+  return NextResponse.json({status:201})
    
     
   }
