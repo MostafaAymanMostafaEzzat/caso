@@ -74,7 +74,7 @@ const message=`<p>Please confirm your email by clicking on the following link :
 
   //send Email
   const { data, error } = await resend.emails.send({
-    from: 'caso <es-Moustafa.Ezzat2026@alexu.edu.eg>',
+    from: 'caso <mostafaaymna6@gmail.com>',
     to: [user.email],
     subject:'Email Confirmation',
     html :`<h4>hello, ${name}:</h4>
