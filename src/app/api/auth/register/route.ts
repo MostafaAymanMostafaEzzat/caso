@@ -82,7 +82,7 @@ const message=`<p>Please confirm your email by clicking on the following link :
 
 
     })
-console.log(i++)
+console.log(data)
 
 //  await sendVerificationEmail({name:user.name,email:user.email,verificationToken,origin})
 // console.log(req.headers['x-forwarded-host'])
