@@ -85,6 +85,7 @@ const message=`<p>Please confirm your email by clicking on the following link :
 
     if (error) {
     console.log('/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+    console.log(error)
 
       return Response.json({ error }, { status: 500 });
     }
