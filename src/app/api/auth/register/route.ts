@@ -82,14 +82,21 @@ const message=`<p>Please confirm your email by clicking on the following link :
 
 
     })
+
+    if (error) {
+      return Response.json({ error }, { status: 500 });
+    }
+    console.log('////////////////////////////')
+
 console.log(data)
+    return Response.json(data);
 
 //  await sendVerificationEmail({name:user.name,email:user.email,verificationToken,origin})
 // console.log(req.headers['x-forwarded-host'])
 //save the verificationToken to the user
 // user.verificationToken=verificationToken
 
-  return NextResponse.json({status:201})
+  // return NextResponse.json({status:201})
    
     
   }

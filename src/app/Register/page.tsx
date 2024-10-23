@@ -12,7 +12,7 @@ export default  function (){
             email:Formdata.get('email'),
         }
 try {
-    const res = await fetch('https://caso.vercel.app/api/auth/register',{
+    const res = await fetch('http://localhost:3000/api/auth/register',{
         method:'post',
         body:JSON.stringify(user),
         headers:{
