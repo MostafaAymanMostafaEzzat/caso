@@ -19,7 +19,7 @@ try {
             'Content-Type':'application/json'
         }
     })
-   
+   console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
        console.log(res)
 } catch (error) {
     console.log(error)
