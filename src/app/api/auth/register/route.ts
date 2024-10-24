@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { notFound } from "next/navigation";
 
-
+import { sendVerificationEmail } from '@/utils/sendVerficationEmail';
 import crypto from 'crypto'
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
@@ -14,7 +14,7 @@ export async function POST(req:Request) :Promise<Response>{
   const resend = new Resend(process.env.RESEND_API_KEY);
   console.log(i++)
 
-const request = await req.json()
+const request = await req.json() 
 console.log(i++)
 
   if (!request ) {
@@ -73,26 +73,8 @@ const message=`<p>Please confirm your email by clicking on the following link :
 <a href="${URL}">Verify Email</a> </p>`;
 
   //send Email
-  const { data, error } = await resend.emails.send({
-    from: 'caso <mostafaaymna6@gmail.com>',
-    to: [user.email],
-    subject:'Email Confirmation',
-    html :`<h4>hello, ${name}:</h4>
-     ${message}`
-
-
-    })
-
-    if (error) {
-    console.log('/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-    console.log(error)
-
-      return Response.json({ error }, { status: 500 });
-    }
-    console.log('////////////////////////////')
-
-console.log(data)
-    return Response.json(data);
+  await sendVerificationEmail({email:user.email,verificationToken,origin:process.env.NEXT_PUBLIC_SERVER_URL})
+    return Response.json({msg:'done'},{status:201});
 
 //  await sendVerificationEmail({name:user.name,email:user.email,verificationToken,origin})
 // console.log(req.headers['x-forwarded-host'])
