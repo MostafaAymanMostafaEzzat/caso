@@ -1,6 +1,6 @@
-import sendEmail from './sendEmail';
+import {sendEmail} from './sendEmail';
 
-export const sendVerificationEmail = async ({email,verificationToken,origin})=>{
+export const sendVerificationEmail = async ({email,verificationToken,origin}:{email:string,verificationToken:string,origin:string})=>{
 
 const URL =`${origin}/user/verify-email?token=${verificationToken}&email=${email}`
 const message=`<p>Please confirm your email by clicking on the following link : 
@@ -15,4 +15,4 @@ return sendEmail({
 
 }
 
- 
+// module.exports=sendVerificationEmail

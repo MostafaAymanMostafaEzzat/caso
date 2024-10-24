@@ -73,7 +73,7 @@ const message=`<p>Please confirm your email by clicking on the following link :
 <a href="${URL}">Verify Email</a> </p>`;
 
   //send Email
-  await sendVerificationEmail({email:user.email,verificationToken,origin:process.env.NEXT_PUBLIC_SERVER_URL})
+  await sendVerificationEmail({email:user.email,verificationToken,origin:process.env.NEXT_PUBLIC_SERVER_URL!})
     return Response.json({msg:'done'},{status:201});
 
 //  await sendVerificationEmail({name:user.name,email:user.email,verificationToken,origin})
