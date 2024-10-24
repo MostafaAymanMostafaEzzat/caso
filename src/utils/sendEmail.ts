@@ -25,9 +25,5 @@ async function main() {
   // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
 }
 
-main().catch((error)=>{
-
-    console.log('error///////////')
-    console.log(error)
-});
+await main()
 }
