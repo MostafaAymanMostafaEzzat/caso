@@ -45,7 +45,7 @@ export default async function Navbar() {
               <div className="flex items-center gap-2">
                 {" "}
                 <Link
-                    href="/Register"
+                    href="/auth/Register"
                     className={buttonVariants({
                       size: "sm",
                       variant: "ghost",

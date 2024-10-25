@@ -1,0 +1,40 @@
+import { error } from "console"
+import { Suspense } from "react"
+
+
+export default async function ({
+    searchParams,
+  }: {
+    searchParams: { [key: string]: string | string[] | undefined }
+  }){
+
+    
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/verify-email`,{
+            method:'get',
+            body:JSON.stringify(searchParams),
+            headers:{
+                'Content-Type':'application/json'
+            }
+        })
+        return(
+            <div className="m-auto bg-slate-200">
+                
+                    okkkkkkkkkkkkkkk
+                
+            </div>
+        )
+        
+    }catch(error){
+        console.log(error)
+        return(
+            <div className="m-auto bg-slate-200">
+                
+                    errrrrrrrrrrrror
+                
+            </div>
+        )
+    }
+
+
+}

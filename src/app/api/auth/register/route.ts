@@ -7,7 +7,7 @@ import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 const bcrypt = require('bcrypt');
 
-export async function POST(req:Request) :Promise<Response>{
+export async function GET(req:Request) :Promise<Response>{
   let i= 0
 
   console.log(i++)
@@ -68,7 +68,7 @@ console.log(i++)
   // const user = await User.create({ name, email, password, role,verificationToken });
 
   
-const URL =`${process.env.NEXT_PUBLIC_SERVER_URL}/user/verify-email?token=${verificationToken}&email=${email}`
+const URL =`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/verify-email?token=${verificationToken}&email=${email}`
 const message=`<p>Please confirm your email by clicking on the following link : 
 <a href="${URL}">Verify Email</a> </p>`;
 

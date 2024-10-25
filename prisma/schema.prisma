@@ -60,9 +60,10 @@ model Configuration {
 
 model User {
   id    String  @id @default(cuid())
-  email String
+  email String @unique
   Order Order[]
-
+  isVerified Boolean @default(false)
+  verifiedDate DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   password String 
