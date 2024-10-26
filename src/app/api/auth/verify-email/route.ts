@@ -2,7 +2,7 @@ import { db } from "@/db";
 
 
 
-export async function GET(req:Request):Promise<Response>{
+export async function POST(req:Request):Promise<Response>{
 
 
     const request = await req.json()
