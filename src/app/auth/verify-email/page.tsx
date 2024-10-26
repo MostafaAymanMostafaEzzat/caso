@@ -11,7 +11,7 @@ export default async function ({
     
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/verify-email`,{
-            method:'get',
+            method:'post',
             body:JSON.stringify(searchParams),
             headers:{
                 'Content-Type':'application/json'
