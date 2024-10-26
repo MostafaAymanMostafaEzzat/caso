@@ -2,7 +2,7 @@ import {sendEmail} from './sendEmail';
 
 export const sendVerificationEmail = async ({email,verificationToken,origin}:{email:string,verificationToken:string,origin:string})=>{
 
-const URL =`${origin}/user/verify-email?token=${verificationToken}&email=${email}`
+const URL =`${origin}/auth/verify-email?token=${verificationToken}&email=${email}`
 const message=`<p>Please confirm your email by clicking on the following link : 
 <a href="${URL}">Verify Email</a> </p>`;
 
