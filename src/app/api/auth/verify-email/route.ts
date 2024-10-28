@@ -7,6 +7,11 @@ export async function POST(req:Request):Promise<Response>{
 
     const request = await req.json()
     const {email,verificationToken}=request
+  console.log('email')
+  console.log(email)
+  console.log('verificationToken')
+  console.log(verificationToken)
+
 if (!email || !verificationToken) {
   console.log('111111')
   throw new Error(' email and verificationToken not found');
