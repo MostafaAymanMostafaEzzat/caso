@@ -42,7 +42,7 @@ await db.user.update({
     },
     data:{
         isVerified:true,
-        verifiedDate: Date.now().toString(),
+        verifiedDate: Date.now() ,
         verificationToken : ''
     }
 })
