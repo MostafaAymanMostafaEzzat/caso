@@ -11,9 +11,7 @@ const bcrypt = require('bcrypt');
 // :Promise<Response>
 export async function POST(req:Request) {
   const request = await req.json() 
-  let res = NextResponse.next()
   console.log('NextResponse')
-  console.log(res)
   const { email, password:canditatePassword } = request;
 
   if (!email || !canditatePassword) {
@@ -53,8 +51,8 @@ export async function POST(req:Request) {
     throw new Error('your account is blocked');
     }
     refreshToken=existingToken.refreshToken;
-    attachCookiesToResponse({ res, user: tokenUser , refreshToken });
-    return res
+    attachCookiesToResponse({ user: tokenUser , refreshToken });
+    return Response.json({ user: tokenUser },{status:200})
     
   }
   refreshToken= crypto.randomBytes(40).toString('hex');
@@ -68,9 +66,9 @@ export async function POST(req:Request) {
   })
   // const token = await Token.create({refreshToken,ip,userAgent,user:user._id})
 
-  attachCookiesToResponse({ res, user: tokenUser , refreshToken });
+  attachCookiesToResponse({ user: tokenUser , refreshToken });
 
 //  return res.status(StatusCodes.OK).json({ user: tokenUser });
     
-  return res
+  return Response.json({ user: tokenUser },{status:200})
   }
