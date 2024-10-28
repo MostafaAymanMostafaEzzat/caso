@@ -18,14 +18,6 @@ export function attachCookiesToResponse ({ user ,refreshToken } :{ user:{ userId
 
   const oneDay = 1000 * 60 * 60 * 24;
 
-  cookies().set('accessToken', accessTokenJWT, {
-    httpOnly: true,
-    expires: new Date(Date.now() + 1000 * 60 * 3),
-    secure: true,
-  });
-  cookies().set('refreshToken', refreshTokenJWT, {
-    httpOnly: true,
-    expires: new Date(Date.now() + oneDay),
-    secure: true,
-  });
+  cookies().set('accessToken', accessTokenJWT);
+  cookies().set('refreshToken', refreshTokenJWT);
 };
