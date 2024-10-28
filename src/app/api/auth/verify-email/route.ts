@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import { error } from "console";
 
 
 
@@ -14,8 +15,8 @@ export async function POST(req:Request):Promise<Response>{
 
 if (!email || !verificationToken) {
   console.log('111111')
-  throw new Error(' email and verificationToken not found');
-
+  // throw new Error(' email and verificationToken not found');
+  return Response.json({error:'email and verificationToken not found'},{status:500})
 }
 const user=await db.user.findFirst({
     where:{
