@@ -68,7 +68,7 @@ console.log(i++)
   // const user = await User.create({ name, email, password, role,verificationToken });
 
   
-const URL =`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/verify-email?token=${verificationToken}&email=${email}`
+const URL =`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/verify-email?verificationToken=${verificationToken}&email=${email}`
 const message=`<p>Please confirm your email by clicking on the following link : 
 <a href="${URL}">Verify Email</a> </p>`;
 
