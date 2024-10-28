@@ -25,7 +25,7 @@ export default async function Navbar() {
               <div className="flex items-center gap-2">
                 <Link
                   className={cn(buttonVariants({ variant: "ghost" }))}
-                  href="/api/auth/logout"
+                  href="/auth/logout"
                 >
                   Sign out
                 </Link>
@@ -54,7 +54,15 @@ export default async function Navbar() {
                     Register 
                   </Link>
 
-                <LoginLink>login</LoginLink>
+                  <Link
+                    href="/auth/login"
+                    className={buttonVariants({
+                      size: "sm",
+                      variant: "ghost",
+                    })}
+                  >
+                    Login 
+                  </Link>
               </div>
             )}
             <div className="text-center  relative ml-4">
