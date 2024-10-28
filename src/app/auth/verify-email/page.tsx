@@ -1,4 +1,5 @@
 import { error } from "console"
+import Link from "next/link"
 import { Suspense } from "react"
 
 
@@ -20,7 +21,10 @@ export default async function ({
         return(
             <div className="m-auto bg-slate-200">
                 
-                    okkkkkkkkkkkkkkk
+                <h2>Account Confirmed</h2>
+      <Link href='/auth/Login' >
+        Please login
+      </Link>
                 
             </div>
         )
