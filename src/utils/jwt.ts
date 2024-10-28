@@ -21,11 +21,11 @@ export function attachCookiesToResponse ({ user ,refreshToken } :{ user:{ userId
   cookies().set('accessToken', accessTokenJWT, {
     httpOnly: true,
     expires: new Date(Date.now() + 1000 * 60 * 3),
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
   });
   cookies().set('refreshToken', refreshTokenJWT, {
     httpOnly: true,
     expires: new Date(Date.now() + oneDay),
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
   });
 };
