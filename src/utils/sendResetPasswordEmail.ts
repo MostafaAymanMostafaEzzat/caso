@@ -1,4 +1,4 @@
-const sendEmail =require('./sendEmail');
+import {sendEmail} from './sendEmail';
 
 export const sendResetPasswordEmail = async ({email,verificationToken,origin}:{email:string,verificationToken:string,origin:string})=>{
 
