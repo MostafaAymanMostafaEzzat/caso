@@ -55,7 +55,7 @@ export default async function Navbar() {
                   </Link>
 
                   <Link
-                    href="/auth/login"
+                    href="/auth/Login"
                     className={buttonVariants({
                       size: "sm",
                       variant: "ghost",

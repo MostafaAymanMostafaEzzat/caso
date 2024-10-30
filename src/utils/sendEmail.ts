@@ -3,6 +3,7 @@ export const sendEmail =async({to,subject,html}:{to:string,subject:string,html:s
 const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
+    secure: false,
     auth: {
         user: 'anthony.kertzmann@ethereal.email',
         pass: 'BRYAYa7tq9s3n8cskD'
@@ -17,7 +18,7 @@ let message = {
 
 // async..await is not allowed in global scope, must use a wrapper
 async function main() {
-
+console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm')
   // send mail with defined transport object
   const info = await transporter.sendMail(message);
 
