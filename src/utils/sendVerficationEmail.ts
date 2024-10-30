@@ -15,4 +15,3 @@ return sendEmail({
 
 }
 
-// module.exports=sendVerificationEmail
