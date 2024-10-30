@@ -14,5 +14,3 @@ return sendEmail({
 })
 
 }
-
-module.exports=sendResetPasswordEmail
