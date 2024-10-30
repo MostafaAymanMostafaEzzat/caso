@@ -1,3 +1,4 @@
+import { Button } from "@/components/button"
 import { error } from "console"
 import Link from "next/link"
 import { FormEvent, Suspense } from "react"
@@ -44,7 +45,7 @@ try {
             <input type="password" id="password" name="password" required />
             <label htmlFor="ConfirmPassword">Confirm Password</label>
             <input type="password" id="ConfirmPassword" name="ConfirmPassword" required />
-
+            <Button type="submit">Continue</Button>
         </form>
 
     </div>

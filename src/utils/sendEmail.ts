@@ -18,7 +18,7 @@ let message = {
 
 // async..await is not allowed in global scope, must use a wrapper
 async function main() {
-console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm')
+
   // send mail with defined transport object
   const info = await transporter.sendMail(message);
 
