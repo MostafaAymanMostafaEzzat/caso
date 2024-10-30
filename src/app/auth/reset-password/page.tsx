@@ -23,8 +23,8 @@ export default async function ({
             password ,...searchParams
         }
 try {
- 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/reset-password`,{
+ console.log('llllllllllllllllllllllol')
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/resetPassword`,{
         method:'post',
         body:JSON.stringify(user),
         headers:{
@@ -45,7 +45,9 @@ try {
             <input type="password" id="password" name="password" required />
             <label htmlFor="ConfirmPassword">Confirm Password</label>
             <input type="password" id="ConfirmPassword" name="ConfirmPassword" required />
-            <Button type="submit">Continue</Button>
+            
+            <input type="submit"  value='Continue'/>
+                
         </form>
 
     </div>
