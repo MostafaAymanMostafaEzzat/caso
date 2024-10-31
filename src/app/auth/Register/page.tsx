@@ -27,6 +27,7 @@ export default function () {
       );
       console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
       console.log(res);
+      setIsRigisterd(true)
     } catch (error: any) {
       console.log(error);
       console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
