@@ -43,7 +43,7 @@ import { Button } from "@/components/button";
 import { Field, Label, Radio, RadioGroup } from "@headlessui/react";
 import Link from "next/link";
 import { useUploadThing } from "@/lib/uploadthing";
-import { toast } from "@/components/ui/use-toast";
+import {  useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
 export default function DesignOflient({
@@ -66,7 +66,7 @@ export default function DesignOflient({
     height: height / 4,
   });
   const {isUploading,startUpload} = useUploadThing('imageUploader')
-
+  const { toast } = useToast()
   const {mutate}= useMutation({
     
     mutationFn : async (arg:updateDataConfig)=>{
@@ -127,6 +127,8 @@ export default function DesignOflient({
       const image = new Image(Dimention.width, Dimention.height);
       image.crossOrigin = "anonymous";
       image.src = imgUrl;
+      
+      // throw new Error('kkkkkkkkkkkkkkkk')
       await new Promise((resolve) => (image.onload = resolve));
       ctx?.drawImage(image, orginX, orginY, Dimention.width, Dimention.height);
       let blob = await new Promise((resolve) =>

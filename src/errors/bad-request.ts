@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { NextResponse } from 'next/server';
+
 
 // export default class BadRequestError extends CustomAPIError {
 //   statusCode:number
@@ -11,5 +11,5 @@ import { NextResponse } from 'next/server';
 
 
 export default function BadRequestError(message:string){
-   return NextResponse.json({message},{status:StatusCodes.BAD_REQUEST})
+   return Response.json({message},{status:StatusCodes.BAD_REQUEST})
 }

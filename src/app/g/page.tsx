@@ -1,22 +1,26 @@
 'use client'
-import { useEffect } from "react";
+  
+import { useToast } from "@/components/ui/use-toast"
+import axios from "axios"
+import { useEffect } from "react"
 
-import axios, { AxiosError } from 'axios'
-export default function () {
- 
-useEffect(()=>{
-  async function g(){
+export default function ToastFun(){
+    const { toast } = useToast()
+    let s =true
+    console.log('popopoooooooo')
 
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cookie`)
-      if(!res){
-     console.log('sucsesss')
+   //  useEffect(()=>{  
+   //    toast({
+   //    title:"message",
+   //    variant: 'destructive',
+   //    description: 'There was an error on our end. Please try again.',
+   //  })},[s])
 
-      }
-     console.log('sucsesss')
-        //  console.log(res)
-        //  return('res')
-  }
-   g()
-})
-
-,[]}
+  return(<>
+      <button onClick={()=>{    toast({
+      title:"message",
+      variant: 'destructive',
+      description: 'There was an error on our end. Please try again.',
+    })}}> kkkkkkkkkkk</button>
+  </>)
+}

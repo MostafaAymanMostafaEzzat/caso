@@ -9,13 +9,13 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { CustomError } from "@/errors";
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
  try {
   const request = await req.json();
   const { email, name, password } = request;
 
   if (!email || !name || !password) {
-     CustomError.BadRequestError(
+    return CustomError.BadRequestError(
       "Please provide email and password and name"
     );
   }
@@ -26,12 +26,15 @@ export async function POST(req: Request) {
     },
   });
 
+
   if (emailAlreadyExists) {
-    CustomError.BadRequestError("Email already exists");
+    return CustomError.BadRequestError("Email already exists , please choose another value ");
   }
 
   // first registered user is an admin
   const isFirstAccount = (await db.user.count()) === 0;
+
+
   const role = isFirstAccount ? "admin" : "user";
   const salt = await bcrypt.genSalt(10);
   const passwordHashed = await bcrypt.hash(password, salt);
@@ -53,8 +56,12 @@ export async function POST(req: Request) {
     verificationToken,
     origin: process.env.NEXT_PUBLIC_SERVER_URL!,
   });
+
+
   return Response.json({ msg: "done" }, { status: 201 });
  } catch (error) {
-  CustomError.BadRequestError('somthing went wrong')
+  console.log(error)
+  return  CustomError.BadRequestError('somthing went wrong')
+  
  }
 }

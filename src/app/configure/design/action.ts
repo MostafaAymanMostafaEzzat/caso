@@ -15,6 +15,7 @@ export interface updateDataConfig {
 
 
 export async function updateConfig({configId,material,finish,model,color}:updateDataConfig) {
+
     const config = await db.configuration.update({
         where:{id:configId},
         data:{
