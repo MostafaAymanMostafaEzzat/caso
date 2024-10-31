@@ -39,13 +39,15 @@ export default function () {
     }
   };
   return (
-    <MaxWidthWithWrapper>
-        <div className="m-auto bg-slate-200 ">
-      {isRigisterd ? (
-        <p className="bg-green-500/20 ">Success! Please check your email to verify account</p>
-      ) : (
+    <MaxWidthWithWrapper className="flex-1 flex justify-center items-center">
         
-          <form action={Register}>
+      {isRigisterd ? (
+        <p className="bg-green-400/70 mt-20 font-semibold text-xl mx-auto">Success! Please check your email to verify account</p>
+      ) : (
+        <div className=" bg-slate-200/50 ">
+            <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Register</h1>
+          <form action={Register} className="flex flex-col gap-4 p-10 w-96">
+
             <label htmlFor="name">Name</label>
             <input type="text" id="name" name="name" required ref={nameRef} />
             <label htmlFor="email">email</label>
@@ -67,9 +69,10 @@ export default function () {
 
             <input className={buttonVariants()} type="submit" value="Submit" />
           </form>
+          </div>
        
       )}
-       </div>
+       
    </MaxWidthWithWrapper>
   );
 }

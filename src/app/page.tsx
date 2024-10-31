@@ -222,7 +222,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div >
+          <div>
             <div className="w-fit mx-auto text-slate-600">
               <div className="flex gap-3   text-lg ">
                 <Check className="w-5 h-10 inline text-green-500" />

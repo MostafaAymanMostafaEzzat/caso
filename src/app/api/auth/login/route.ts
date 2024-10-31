@@ -7,33 +7,34 @@ import { Resend } from "resend";
 import comparePassword from "@/utils/comparePassword";
 import { NextRequest, NextResponse } from "next/server";
 import { attachCookiesToResponse } from "@/utils/jwt";
+import { CustomError } from "@/errors";
 const bcrypt = require('bcrypt');
 // :Promise<Response>
 export async function POST(req:Request) {
-  const request = await req.json() 
+  try {
+    const request = await req.json() 
   console.log('NextResponse')
   const { email, password:canditatePassword } = request;
 
   if (!email || !canditatePassword) {
-    throw new Error('Please provide email and password');
+    return CustomError.BadRequestError('Please provide email and password');
   }
   const  user = await db.user.findUnique({
     where:{
       email:email
     }
   })
-  // const user = await User.findOne({ email });
-
+ 
   if (!user) {
-    throw new Error('Invalid Credentials');
+    return CustomError.UnauthenticatedError('Invalid Credentials');
   }
   const isPasswordCorrect = await comparePassword({canditatePassword, password:user.password});
   if (!isPasswordCorrect) {
-    throw new Error('Invalid Credentials');
+        return CustomError.UnauthenticatedError('Invalid Credentials');
   }
 
   if (!user.isVerified) {
-    throw new Error('Please verify your email');
+    return CustomError.UnauthenticatedError('Please verify your email');
   }
    const tokenUser =  { userId: user.id, role: user.role };
 
@@ -48,7 +49,7 @@ export async function POST(req:Request) {
   // const existingToken=await Token.findOne({user:user._id})
   if(existingToken){
     if(!existingToken.isValid){
-    throw new Error('your account is blocked');
+    return CustomError.UnauthenticatedError('your account is blocked');
     }
     refreshToken=existingToken.refreshToken;
     attachCookiesToResponse({ user: tokenUser , refreshToken });
@@ -71,4 +72,8 @@ export async function POST(req:Request) {
 //  return res.status(StatusCodes.OK).json({ user: tokenUser });
     
   return Response.json({ user: tokenUser },{status:200})
+  } catch (error) {
+    return  CustomError.BadRequestError('somthing went wrong')
+  }
+  
   }

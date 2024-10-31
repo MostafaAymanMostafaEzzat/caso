@@ -1,61 +1,72 @@
-'use client'
+"use client";
 
-import { Button } from "@/components/button"
-import { useQuery } from "@tanstack/react-query"
-import Link from "next/link"
-import { FormEvent, useEffect, useRef, useState } from "react"
+import { Button } from "@/components/button";
+import MaxWidthWithWrapper from "@/components/MaxwidthWithWrapper";
+import { useToast } from "@/components/ui/use-toast";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Link from "next/link";
+import { redirect, useRouter } from "next/navigation";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 // import { cookies } from "next/headers";
-export default  function (){
+export default function () {
+  const { toast } = useToast();
+  const router = useRouter()
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  async function login(e: FormEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const user = {
+      email: emailRef.current?.value,
+      password: passwordRef.current?.value,
+    };
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`,user
+      );
+      
+      router.push( `${process.env.NEXT_PUBLIC_SERVER_URL}`)
+      router.refresh()
+    } catch (error : any) {
+      console.log(error);
 
-   const emailRef = useRef<HTMLInputElement | null>(null)
-   const passwordRef = useRef<HTMLInputElement | null>(null)
 
-
-
-    async function login(e:FormEvent<HTMLButtonElement>) {
-        e.preventDefault();
-        const user = {
-            email : emailRef.current?.value,
-            password : passwordRef.current?.value
-        }
-try {
- 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`,{
-        method:'post',
-        body:JSON.stringify(user),
-        headers:{
-            'Content-Type':'application/json',
-        }
-    })
-} catch (error) {
-    
-    console.log(error)
-}
-   console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-   console.log('login')
+      toast({
+        title: error.response?.data?.message,
+        variant: "destructive",
+      });
     }
 
+  }
 
+  return (
+    <MaxWidthWithWrapper className="flex-1 flex justify-center items-center">
+    <div className=" bg-slate-200/50 ">
+    <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Login</h1>
+      <form className="flex flex-col gap-4 p-10 w-96">
+        <label htmlFor="email">email</label>
+        <input type="email" id="email" name="email" required ref={emailRef}  />
+        <label htmlFor="password">password</label>
+        <input
+          type="text"
+          id="password"
+          name="password"
+          required
+          ref={passwordRef}
+        />
 
-
-
-
-    
-    return(
-        <div className="m-auto bg-slate-200 ">
-            <form className="flex flex-col gap-2">
-                <label htmlFor="email">email</label>
-                <input type="email" id="email" name="email" required ref={emailRef}/>
-                <label htmlFor="password">password</label>
-                <input type="text" id="password" name="password" required ref={passwordRef}/>
-                
-                <Button onClick={(e)=>{login(e)}}> Login</Button>
-                <Link href='/auth/forgotPassword'> Forgot Your Password ?</Link>
-            </form>
-
-        </div>
-    )
-
-
+        <Button
+          onClick={(e) => {
+            login(e);
+          }}
+        >
+          {" "}
+          Login
+        </Button>
+        <Link href="/auth/forgotPassword" className="text-gray-500"> Forgot Your Password ?</Link>
+      </form>
+    </div>
+    </MaxWidthWithWrapper>
+  );
 }

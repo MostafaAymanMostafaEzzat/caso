@@ -1,56 +1,40 @@
 import { db } from "@/db";
-import { error } from "console";
+import { CustomError } from "@/errors";
 
+export async function POST(req: Request): Promise<Response> {
+ try {
+  const request = await req.json();
+  const { email, verificationToken } = request;
 
-
-export async function POST(req:Request):Promise<Response>{
-
-
-    const request = await req.json()
-    const {email,verificationToken}=request
-  console.log('email')
-  console.log(email)
-  console.log('verificationToken')
-  console.log(verificationToken)
-
-if (!email || !verificationToken) {
-  console.log('111111')
-  // throw new Error(' email and verificationToken not found');
-  return Response.json({error:'email and verificationToken not found'},{status:500})
-}
-const user=await db.user.findFirst({
-    where:{
-        email:email
-    }
-})
-// const user=await User.findOne({email})
-if (!user) {
-  console.log('22222222')
-
-  throw new Error('Verification Failed');
-}
-if (verificationToken !== user.verificationToken) {
-  console.log('33333333')
-
-  throw new Error('Verification Failed');
-}
-
-
-await db.user.update({
-    where:{
-        email:email
+  if (!email || !verificationToken) {
+    return  CustomError.BadRequestError('somthing went wrong')
+  }
+  const user = await db.user.findFirst({
+    where: {
+      email: email,
     },
-    data:{
-        isVerified:true,
-        verifiedDate: new Date(Date.now()),
-        verificationToken : ''
-    }
-})
-// user.isVerified=true
-// user.verifiedDate= Date.now()
-// user.verificationToken = '';
-// await user.save();
+  });
 
- return Response.json({msg:'Email Verified'},{status:200})
+  if (!user) {
+    return CustomError.UnauthenticatedError('Verification Failed');
+  }
+  if (verificationToken !== user.verificationToken) {
+    return CustomError.UnauthenticatedError('Verification Failed');
+  }
 
+  await db.user.update({
+    where: {
+      email: email,
+    },
+    data: {
+      isVerified: true,
+      verifiedDate: new Date(Date.now()),
+      verificationToken: "",
+    },
+  });
+
+  return Response.json({ msg: "Email Verified" }, { status: 200 });
+ } catch (error) {
+  return  CustomError.BadRequestError('somthing went wrong')
+ }
 }

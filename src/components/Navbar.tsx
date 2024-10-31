@@ -1,15 +1,21 @@
+
 import Link from "next/link";
 import MaxWidthWithWrapper from "./MaxwidthWithWrapper";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "./button";
+import { Button, buttonVariants } from "./button";
 import { ArrowRight } from "lucide-react";
 import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { authenticateUser } from "@/middleware/authenticateUser";
+import { db } from "@/db";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { LogoutButton } from "./logout/client";
+
 
 export default async function Navbar() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-  const isAdmin = user?.email === process.env.ADMIN_EMAIL;
+  const user =await authenticateUser()
+  const isAdmin = user?.role
 
   return (
     <div className="sticky top-0 inset-x-0 w-full bg-slate-100/30 border-b border-zinc-950/20 border-solid py-5 backdrop-blur-lg z-[9999999999999999]">
@@ -23,12 +29,7 @@ export default async function Navbar() {
           <div className="flex gap-5 items-center">
             {user ? (
               <div className="flex items-center gap-2">
-                <Link
-                  className={cn(buttonVariants({ variant: "ghost" }))}
-                  href="/auth/logout"
-                >
-                  Sign out
-                </Link>
+              <LogoutButton user={user}/>
                 {isAdmin ? (
                   <Link
                     href="/dashboard"
