@@ -1,5 +1,9 @@
 // 'use server'
 // import axios from 'axios'
+import { buttonVariants } from '@/components/button'
+import { Toast } from '@/components/ui/toast'
+import { toast } from '@/components/ui/use-toast'
+import axios from 'axios'
 import { json } from 'stream/consumers'
 
 export default  function (){
@@ -12,17 +16,15 @@ export default  function (){
             email:Formdata.get('email'),
         }
 try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/register`,{
-        method:'post',
-        body:JSON.stringify(user),
-        headers:{
-            'Content-Type':'application/json'
-        }
-    })
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/register`,user)
    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
        console.log(res)
-} catch (error) {
+} catch (error : any) {
     console.log(error)
+    toast({
+        title: error.response.data.message,
+        variant: 'destructive',
+      })
 }
 
 
@@ -37,7 +39,7 @@ try {
                 <label htmlFor="password">password</label>
                 <input type="text" id="password" name="password" required/>
                 
-                <input type="submit" value='Submit'/>
+                <input className={buttonVariants()} type="submit" value='Submit'/>
             </form>
 
         </div>

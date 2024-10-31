@@ -1,7 +1,22 @@
+'use client'
+import { useEffect } from "react";
+
+import axios, { AxiosError } from 'axios'
 export default function () {
-  return (
-    <div className="relative ml-8 border-2 border-red-600 border-solid w-[200px] ">
-        <img src="/horse.jpg" alt="" className="object-cover w-full" />
-    </div>
-  );
-}
+ 
+useEffect(()=>{
+  async function g(){
+
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cookie`)
+      if(!res){
+     console.log('sucsesss')
+
+      }
+     console.log('sucsesss')
+        //  console.log(res)
+        //  return('res')
+  }
+   g()
+})
+
+,[]}
