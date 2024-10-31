@@ -3,12 +3,13 @@
 import { buttonVariants } from "@/components/button";
 
 import axios from "axios";
-const [isRigisterd, setIsRigisterd] = useState(false);
+
 import { useToast } from "@/components/ui/use-toast";
 import { useRef, useState } from "react";
 import MaxWidthWithWrapper from "@/components/MaxwidthWithWrapper";
 export default function () {
   const { toast } = useToast();
+  const [isRigisterd, setIsRigisterd] = useState(false);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const nameRef = useRef<HTMLInputElement | null>(null);
