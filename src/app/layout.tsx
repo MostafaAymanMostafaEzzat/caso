@@ -30,7 +30,7 @@ export default function RootLayout({
           </div>
           <Footer/>
         </main>
-        <Toaster/>
+        <Toaster />
 
       </body>
     </html>

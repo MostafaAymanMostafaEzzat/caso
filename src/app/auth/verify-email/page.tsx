@@ -13,12 +13,12 @@ export default async function ({
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/verify-email`,searchParams
     );
     return (
-      <div className="mx-auto mt-20 bg-green-400/70 font-semibold text-xl">
-        Account Confirmed
-        <Link href="/auth/Login" className="cursor-pointer ">Please login</Link>
+      <div className="mx-auto mt-20 bg-green-400/70 font-semibold text-xl p-6 text-slate-500">
+        Account Confirmed Please {' '}
+        <Link href="/auth/Login" className="cursor-pointer text-slate-600"> login</Link>
       </div>
     );
   } catch (error : any) {
-    return <div className="mx-auto mt-20 bg-green-950  font-semibold text-xl">{error.response?.data?.message || "something went wrong"}</div>;
+    return <div className="mx-auto mt-20 bg-green-950  font-semibold text-xl p-6 text-slate-500">{error.response?.data?.message || "something went wrong"}</div>;
   }
 }

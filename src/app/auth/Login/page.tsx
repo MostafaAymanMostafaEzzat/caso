@@ -64,7 +64,7 @@ export default function () {
           {" "}
           Login
         </Button>
-        <Link href="/auth/forgotPassword" className="text-gray-500"> Forgot Your Password ?</Link>
+        <Link href="/auth/forgotPassword" className="text-gray-500 hover:text-gray-700"> Forgot Your Password ?</Link>
       </form>
     </div>
     </MaxWidthWithWrapper>
