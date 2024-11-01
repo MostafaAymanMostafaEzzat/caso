@@ -50,7 +50,7 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
         data:{
             amount:price /100,
             configurationId:ConfigID,
-            userId:user.id
+            userId:user.userId
         }
     })
   }
