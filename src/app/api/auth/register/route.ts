@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { notFound } from "next/navigation";
 import { StatusCodes } from 'http-status-codes';
-
+import validator from 'validator';
 import { sendVerificationEmail } from "@/utils/sendVerficationEmail";
 import crypto from "crypto";
 import { Resend } from "resend";
@@ -19,6 +19,12 @@ export async function POST(req: Request): Promise<Response> {
       "Please provide email and password and name"
     );
   }
+  if (!validator.isEmail(email)) {
+    return CustomError.BadRequestError(
+      "Please provide vaild email "
+    );
+  }
+
 
   const emailAlreadyExists = await db.user.findFirst({
     where: {

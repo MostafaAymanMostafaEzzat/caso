@@ -21,7 +21,7 @@ onClick={()=>{
   router.push(`/auth/${to}`)
 }}
 >
-Login 
+{to}
 </Button>
 )
 }
