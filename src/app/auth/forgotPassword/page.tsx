@@ -33,7 +33,7 @@ try {
     }
 
     return(
-        <MaxWidthWithWrapper className="flex-1 flex justify-center items-center">
+        <MaxWidthWithWrapper className="flex-1 flex justify-center items-center flex-col">
 <div className=" bg-slate-200/50 ">
         <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Reset Password</h1>
 
@@ -43,7 +43,7 @@ try {
                 <Button onClick={(e)=>{enterEmailForResetPassword(e)}}> Login</Button>
             </form>
             </div>
-            {isOK? <div className=" text-right bg-green-400/70 mt-6 font-semibold text-xl mx-auto text-slate-500 p-6"> Please check your email to complete the reset Password process</div>    :null}
+            {isOK? <div className=" text-right bg-green-400/20 mt-6 font-semibold text-lg mx-auto text-slate-500 p-6"> Please check your email to complete the reset Password process</div>    :null}
         </MaxWidthWithWrapper>
     )
 
