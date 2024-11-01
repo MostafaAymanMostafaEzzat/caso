@@ -86,6 +86,7 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
     cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
   })
   console.log('end session')
+  console.log(session.url)
 
   return { url: session.url }
 }
