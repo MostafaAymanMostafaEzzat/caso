@@ -1,3 +1,5 @@
+'use client'
+
 import axios from "axios";
 import { error } from "console";
 import Link from "next/link";
