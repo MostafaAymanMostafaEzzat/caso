@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/button"
 import MaxWidthWithWrapper from "@/components/MaxwidthWithWrapper"
 import { useToast } from "@/components/ui/use-toast"
