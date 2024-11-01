@@ -6,7 +6,8 @@ import { cookies } from "next/headers";
 
 export const authenticateUser = async () => {
   const [refreshToken, accessToken] = cookies().getAll();
-  if (!refreshToken || !accessToken) {
+  if (!refreshToken) {
+    console.log(!refreshToken)
     return null;
   }
   try {
@@ -16,22 +17,27 @@ export const authenticateUser = async () => {
       return payload?.user;
     }
     const payload = isTokenValid(refreshToken.value) as JwtPayload;
+ 
 
     const existingToken = await db.token.findFirst({
       where: {
-        user: payload?.user?.userId,
+        userId: payload?.user?.userId,
         refreshToken: payload?.refreshToken,
       },
     });
+
+
 
     if (!existingToken || !existingToken.isValid) {
       return null;
     }
 
+
     attachCookiesToResponse({
       user: payload.user,
       refreshToken: existingToken?.refreshToken,
     });
+
 
     return payload.user;
   } catch (error) {
