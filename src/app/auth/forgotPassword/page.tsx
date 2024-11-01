@@ -21,6 +21,7 @@ export default  function (){
 try {
  
     const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/forgotPassword`,user)
+    setISOK(true)
 } catch (error:any) {
     console.log(error)
     toast({
@@ -42,7 +43,7 @@ try {
                 <Button onClick={(e)=>{enterEmailForResetPassword(e)}}> Login</Button>
             </form>
             </div>
-            {isOK?    <div className=" text-right bg-green-400/70 mt-6 font-semibold text-xl mx-auto text-slate-500 p-6"> Please check your email to complete the reset Password process</div>    :null}
+            {isOK? <div className=" text-right bg-green-400/70 mt-6 font-semibold text-xl mx-auto text-slate-500 p-6"> Please check your email to complete the reset Password process</div>    :null}
         </MaxWidthWithWrapper>
     )
 
