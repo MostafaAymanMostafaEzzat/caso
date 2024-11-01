@@ -26,7 +26,7 @@ export default function () {
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`,user
       );
       
-      router.push( `${process.env.NEXT_PUBLIC_SERVER_URL}`)
+      router.push( localStorage.getItem('returnedURL') || `${process.env.NEXT_PUBLIC_SERVER_URL}`)
       router.refresh()
     } catch (error : any) {
       console.log(error);
@@ -41,10 +41,10 @@ export default function () {
   }
 
   return (
-    <MaxWidthWithWrapper className="flex-1 flex justify-center items-center">
+    <MaxWidthWithWrapper className="flex-1 flex justify-center items-center mt-10">
     <div className=" bg-slate-200/50 ">
     <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Login</h1>
-      <form className="flex flex-col gap-4 p-10 w-96">
+      <form className="flex flex-col gap-4 p-10  shadow-lg shadow-slate-300/50 sm:w-52 md:w-96">
         <label htmlFor="email">email</label>
         <input type="email" id="email" name="email" required ref={emailRef}  />
         <label htmlFor="password">password</label>

@@ -6,10 +6,11 @@ import { SignOut } from "./action"
 
 
 export function LogoutButton ({user}:{user:{userId:string,role:string}}){
+    
     return(
     <Button
         variant='ghost'
-    onClick={()=>{SignOut(user)}}
+    onClick={()=>{SignOut(user); localStorage.removeItem("returnedURL")}}
   >
     Sign out
   </Button>

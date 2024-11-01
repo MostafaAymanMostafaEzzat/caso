@@ -6,6 +6,7 @@ import Providers from '@/components/Providers'
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
 
 const recursive = Recursive({ subsets: ['latin'] })
 
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={recursive.className}>
+      <body className={cn('w-[100vw]',recursive.className)}>
         <Navbar/>
       <main className=' flex flex-col  min-h-[calc(100vh-3.5rem-1px)] '>
         <div className='flex  flex-col flex-1 '>

@@ -33,14 +33,14 @@ try {
     }
 
     return(
-        <MaxWidthWithWrapper className="flex-1 flex justify-center items-center flex-col">
+        <MaxWidthWithWrapper className="flex-1 flex justify-center items-center flex-col mt-10">
 <div className=" bg-slate-200/50 ">
         <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Forgot Password</h1>
 
-            <form className="flex flex-col gap-4 p-10 w-96 ">
+            <form className="flex flex-col gap-4 p-10 w-96 shadow-lg shadow-slate-300/50">
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" name="email" required ref={emailRef}/> 
-                <Button onClick={(e)=>{enterEmailForResetPassword(e)}}> Login</Button>
+                <Button onClick={(e)=>{enterEmailForResetPassword(e)}}> Continue</Button>
             </form>
             </div>
             {isOK? <div className=" text-right bg-green-400/20 mt-6 font-semibold text-lg mx-auto text-slate-500 p-6"> Please check your email to complete the reset Password process</div>    :null}

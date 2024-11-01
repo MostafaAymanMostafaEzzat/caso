@@ -39,14 +39,14 @@ export default function () {
     }
   };
   return (
-    <MaxWidthWithWrapper className="flex-1 flex justify-center items-center">
+    <MaxWidthWithWrapper className="flex-1 flex justify-center items-center mt-10">
         
       {isRigisterd ? (
         <p className="bg-green-400/20 mt-20 font-semibold text-lg mx-auto text-slate-500 p-6">Success! Please check your email to verify account</p>
       ) : (
         <div className=" bg-slate-200/50 ">
             <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Register</h1>
-          <form action={Register} className="flex flex-col gap-4 p-10 w-96">
+          <form action={Register} className="flex flex-col gap-4 p-10 sm:w-52 md:w-96 shadow-lg shadow-slate-300/50">
 
             <label htmlFor="name">Name</label>
             <input type="text" id="name" name="name" required ref={nameRef} />

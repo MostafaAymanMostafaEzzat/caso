@@ -2,6 +2,7 @@
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
 import { db } from "@/db";
 import { stripe } from "@/lib/stripe";
+import { authenticateUser } from "@/middleware/authenticateUser";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -19,8 +20,8 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
   }
   console.log('helooo 3')
 
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+ 
+  const user = await authenticateUser()
   const { finish, material } = configuration;
   console.log('helooo 4')
   if (!user) {
@@ -28,7 +29,7 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
   }
   console.log(user)
   console.log('kkkkkkkkkkkkkkkkkkkkkkk')
-  console.log(getUser)
+  
 
   let price = BASE_PRICE;
   if (finish === "textured") price += PRODUCT_PRICES.finish.textured;
@@ -39,7 +40,7 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
   let Order = await db.order.findFirst({
     where: {
       configurationId: configuration.id,
-      userId: user.id,
+      userId: user.userId,
     },
   });
   console.log('helooo 6')
@@ -77,7 +78,7 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
     payment_method_types: ['card'],
     shipping_address_collection: { allowed_countries: ['DE', 'US'] },
     metadata: {
-        userId: user.id,
+        userId: user.userId,
         orderId: Order.id,
       },
     mode:"payment",

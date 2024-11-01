@@ -9,9 +9,12 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { authenticateUser } from "@/middleware/authenticateUser";
 import { db } from "@/db";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 import { LogoutButton } from "./logout/client";
-
+import { returnAndStartFromTheEnd } from "./returnAndStartFromTheEnd";
+import { redirect } from 'next/navigation'
+import LoginButton from "./authButton";
+import AuthButton from "./authButton";
 
 export default async function Navbar() {
   const user =await authenticateUser()
@@ -45,25 +48,11 @@ export default async function Navbar() {
             ) : (
               <div className="flex items-center gap-2">
                 {" "}
-                <Link
-                    href="/auth/Register"
-                    className={buttonVariants({
-                      size: "sm",
-                      variant: "ghost",
-                    })}
-                  >
-                    Register 
-                  </Link>
+                
+                <AuthButton to='Register'/>
 
-                  <Link
-                    href="/auth/Login"
-                    className={buttonVariants({
-                      size: "sm",
-                      variant: "ghost",
-                    })}
-                  >
-                    Login 
-                  </Link>
+
+                  <AuthButton to='Login'/>
               </div>
             )}
             <div className="text-center  relative ml-4">

@@ -45,7 +45,7 @@ try {
 
     }
     return(
-        <MaxWidthWithWrapper className="flex-1 flex justify-center items-center">
+        <MaxWidthWithWrapper className="flex-1 flex justify-center items-center mt-10">
 {isReset ? 
             <div className="mx-auto mt-20 bg-green-400/20 font-semibold text-lg p-6 text-slate-500">
             The password has been reset successfully , Please{' '}
@@ -54,7 +54,7 @@ try {
 (<div className=" bg-slate-200/50 ">
 <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Reset Password</h1>
 
-        <form action={resetPassword} className="flex flex-col gap-4 p-10 w-96 ">
+        <form action={resetPassword} className="flex flex-col gap-4 p-10 sm:w-52 md:w-96 shadow-lg shadow-slate-300/50">
             <label htmlFor="password">password</label>
             <input type="password" id="password" name="password" required />
             <label htmlFor="ConfirmPassword">Confirm Password</label>
