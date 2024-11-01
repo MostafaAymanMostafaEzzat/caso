@@ -17,7 +17,7 @@ export default async function ({
     return (
       <div className="mx-auto mt-20 bg-green-400/20 font-semibold text-lg p-6 text-slate-500">
         Account Confirmed Please {' '}
-        <Link href="/auth/Login" className="cursor-pointer text-slate-600"> login</Link>
+        <Link href="/auth/Login" className="cursor-pointer text-green-600"> login</Link>
       </div>
     );
   } catch (error : any) {

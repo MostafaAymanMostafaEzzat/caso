@@ -49,7 +49,7 @@ try {
 {isReset ? 
             <div className="mx-auto mt-20 bg-green-400/20 font-semibold text-lg p-6 text-slate-500">
             The password has been reset successfully , Please{' '}
-            <Link href="/auth/Login" className="cursor-pointer text-slate-600"> login</Link>
+            <Link href="/auth/Login" className="cursor-pointer text-green-600"> login</Link>
           </div>:
 (<div className=" bg-slate-200/50 ">
 <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Reset Password</h1>
@@ -60,7 +60,8 @@ try {
             <label htmlFor="ConfirmPassword">Confirm Password</label>
             <input type="password" id="ConfirmPassword" name="ConfirmPassword" required />
             
-            <input type="submit"  value='Continue'/>
+            <Button type="submit"> Submit</Button>
+
                 
         </form>
 
