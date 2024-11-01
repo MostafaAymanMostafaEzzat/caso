@@ -16,7 +16,6 @@ export default async function ({
     const { toast } = useToast();
 
     async function resetPassword(FormData:FormData) {
-        'use server'
         const password= FormData.get('password') 
         const ConfirmPassword= FormData.get('ConfirmPassword') 
         if(password !== ConfirmPassword){
