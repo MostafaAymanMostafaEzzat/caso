@@ -47,7 +47,10 @@ try {
     return(
         <MaxWidthWithWrapper className="flex-1 flex justify-center items-center">
 {isReset ? 
-        <p className="bg-green-400/20 mt-20 font-semibold text-lg mx-auto text-slate-500 p-6">Success! Please check your email to verify account</p>:
+            <div className="mx-auto mt-20 bg-green-400/20 font-semibold text-lg p-6 text-slate-500">
+            The password has been reset successfully , Please{' '}
+            <Link href="/auth/Login" className="cursor-pointer text-slate-600"> login</Link>
+          </div>:
 (<div className=" bg-slate-200/50 ">
 <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Reset Password</h1>
 
