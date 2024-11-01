@@ -35,7 +35,7 @@ try {
     return(
         <MaxWidthWithWrapper className="flex-1 flex justify-center items-center flex-col">
 <div className=" bg-slate-200/50 ">
-        <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Reset Password</h1>
+        <h1 className="text-center font-bold text-green-600 pt-12 text-4xl" >Forgot Password</h1>
 
             <form className="flex flex-col gap-4 p-10 w-96 ">
                 <label htmlFor="email">Email</label>

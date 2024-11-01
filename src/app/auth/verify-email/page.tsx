@@ -13,7 +13,7 @@ export default async function ({
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/verify-email`,searchParams
     );
     return (
-      <div className="mx-auto mt-20 bg-green-400/70 font-semibold text-xl p-6 text-slate-500">
+      <div className="mx-auto mt-20 bg-green-400/20 font-semibold text-lg p-6 text-slate-500">
         Account Confirmed Please {' '}
         <Link href="/auth/Login" className="cursor-pointer text-slate-600"> login</Link>
       </div>
