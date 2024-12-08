@@ -23,14 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn('w-[100vw]',recursive.className)}>
+      
         <Navbar/>
       <main className=' flex flex-col  min-h-[calc(100vh-3.5rem-1px)] '>
         <div className='flex  flex-col flex-1 '>
-        <Providers>{children}</Providers>
+        <Providers> {children} </Providers>
 
           </div>
           <Footer/>
         </main>
+        
         <Toaster />
 
       </body>

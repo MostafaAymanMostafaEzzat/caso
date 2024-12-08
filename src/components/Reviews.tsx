@@ -22,7 +22,7 @@ const PHONES = [
     for (let i = 0; i < array.length; i++) {
         
         const index = i % nunPart;
-        console.log(index);
+        // console.log(index);
         if(!result[index]){
             result[index]=[];
         }

@@ -9,7 +9,7 @@ import { ReactNode } from "react";
 export default function ({children}:{children:ReactNode}){
 
 return(
-    <MaxWidthWithWrapper className="flex flex-col flex-1">
+    <MaxWidthWithWrapper className="flex flex-col flex-1 select-none">
         <Steps/>
         {children}
     </MaxWidthWithWrapper>

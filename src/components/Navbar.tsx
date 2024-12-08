@@ -1,27 +1,20 @@
-
+'use client'
 import Link from "next/link";
 import MaxWidthWithWrapper from "./MaxwidthWithWrapper";
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "./button";
 import { ArrowRight } from "lucide-react";
-import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { authenticateUser } from "@/middleware/authenticateUser";
-import { db } from "@/db";
-import { cookies } from "next/headers";
-// import { redirect } from "next/navigation";
 import { LogoutButton } from "./logout/client";
-import { returnAndStartFromTheEnd } from "./returnAndStartFromTheEnd";
-import { redirect } from 'next/navigation'
-import LoginButton from "./authButton";
 import AuthButton from "./authButton";
+import useAuthOnClient from "./customHooks/authenticateOnClient";
+import { buttonVariants } from "./button";
 
-export default async function Navbar() {
-  const user =await authenticateUser()
-  const isAdmin = user?.role
+
+export default  function Navbar() {
+
+const auth = useAuthOnClient()
+
 
   return (
-    <div className="sticky top-0 inset-x-0 w-full bg-slate-100/30 border-b border-zinc-950/20 border-solid py-5 backdrop-blur-lg z-[9999999999999999]">
+    <div className="sticky top-0 select-none inset-x-0 w-full bg-slate-100/30 border-b border-zinc-950/20 border-solid py-5 backdrop-blur-lg z-[9999999999999999]">
       <MaxWidthWithWrapper>
         <div className="flex justify-between items-center">
           <h1 className="font-bold text-3xl text-zinc-950/85">
@@ -30,10 +23,10 @@ export default async function Navbar() {
           </h1>
 
           <div className="flex gap-5 items-center">
-            {user ? (
+            {auth ? (
               <div className="flex items-center gap-2">
-              <LogoutButton user={user}/>
-                {isAdmin ? (
+              <LogoutButton user={auth} />
+                {auth?.role ? (
                   <Link
                     href="/dashboard"
                     className={buttonVariants({
@@ -49,7 +42,7 @@ export default async function Navbar() {
               <div className="flex items-center gap-2">
                 {" "}
                 
-                <AuthButton to='Register'/>
+                <AuthButton to='Register' />
 
 
                   <AuthButton to='Login'/>

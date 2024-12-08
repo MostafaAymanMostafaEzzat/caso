@@ -4,6 +4,7 @@ import Phone from "@/components/phone";
 import { ArrowRight, CheckIcon } from "lucide-react";
 
 import { CaseMaterial, CaseFinish, CaseColor } from "@prisma/client";
+import Confetti from 'react-dom-confetti'
 
 import { COLORS, FINISHES, MATERIALS } from "@/validators/option-validator";
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
@@ -12,6 +13,9 @@ import { Button } from "@/components/button";
 import { useMutation } from "@tanstack/react-query";
 import creatSession from "./action";
 import { useRouter } from "next/navigation";
+import LoginModel from "@/components/LoginModel";
+import { authenticateUser } from "@/middleware/authenticateUser";
+import { useEffect, useState } from "react";
 
 
 
@@ -29,8 +33,11 @@ export default function DesignPreview({
   material: CaseMaterial;
   finish: CaseFinish;
 }) {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
+  const [showConfetti, setShowConfetti] = useState<boolean>(false)
+  useEffect(() => setShowConfetti(true))
   const router = useRouter()
-  const {mutate,isPending} = useMutation({
+  const {mutate :createPaymentSession,isPending} = useMutation({
     mutationKey : ['mustataConfigureOnPreview'],
     mutationFn : async ()=>{
       console.log('helooo')
@@ -47,6 +54,18 @@ export default function DesignPreview({
   })
 
 
+
+  const handleCheckout = async () => {
+    const user = await authenticateUser()
+    if (1) {
+      // create payment session
+      createPaymentSession()
+    } else {
+      // need to log in
+      setIsLoginModalOpen(true)
+    }
+  }
+
   const Tw = COLORS.find((element) => element.value === color)?.tw;
   const Material = MATERIALS.options.find(
     (element) => element.value === material
@@ -61,6 +80,15 @@ export default function DesignPreview({
   }
   return (
     <>
+      <div
+        aria-hidden='true'
+        className='pointer-events-none select-none  flex justify-center'>
+        <Confetti
+          active={showConfetti}
+          config={{ elementCount: 200, spread: 90 }}
+        /> 
+      </div>
+    <LoginModel isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
       <div className="mt-20 flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
         <div className="md:col-span-4 lg:col-span-3 md:row-span-2 md:row-end-2 ">
           <Phone className={cn(`bg-${Tw}`, "")} imgSrc={croppedImageUrl} />
@@ -121,7 +149,7 @@ export default function DesignPreview({
             <div className="font-semibold" >{formatPrice(totalPrice / 100)}</div>
           </div>
           <div className="flex justify-center md:justify-end mt-8 py-10">
-            <Button className="w-44" onClick={()=>mutate()}>
+            <Button className="w-44" onClick={handleCheckout}>
                 check out <ArrowRight />
             </Button>
           </div>

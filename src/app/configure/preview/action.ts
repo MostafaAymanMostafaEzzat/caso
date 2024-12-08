@@ -82,8 +82,8 @@ export default async function creatSession({ ConfigID }: { ConfigID: string }) {
         orderId: Order.id,
       },
     mode:"payment",
-    success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
+    success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?orderId=${Order.id}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/configure/preview?id=${configuration.id}`,
   })
   console.log('end session')
   console.log(session.url)

@@ -5,22 +5,13 @@ import axios from "axios"
 import { useEffect } from "react"
 
 export default function ToastFun(){
-    const { toast } = useToast()
-    let s =true
-    console.log('popopoooooooo')
 
-   //  useEffect(()=>{  
-   //    toast({
-   //    title:"message",
-   //    variant: 'destructive',
-   //    description: 'There was an error on our end. Please try again.',
-   //  })},[s])
-
+useEffect(()=>{
+  console.log('end')
+},[])
+console.log("starwwt")
   return(<>
-      <button onClick={()=>{    toast({
-      title:"message",
-      variant: 'destructive',
-      description: 'There was an error on our end. Please try again.',
-    })}}> kkkkkkkkkkk</button>
+hello
+{console.log('lllllllllllll')}
   </>)
 }

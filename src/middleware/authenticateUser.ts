@@ -1,3 +1,5 @@
+'use server'
+
 import { db } from "@/db";
 import { CustomError } from "@/errors";
 import { attachCookiesToResponse, isTokenValid } from "@/utils/jwt";
@@ -5,9 +7,11 @@ import { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";
 
 export const authenticateUser = async () => {
+  
   const [refreshToken, accessToken] = cookies().getAll();
   if (!refreshToken) {
     console.log(!refreshToken)
+    console.log("refreshToken 1")
     return null;
   }
   try {
@@ -24,23 +28,28 @@ export const authenticateUser = async () => {
         userId: payload?.user?.userId,
         refreshToken: payload?.refreshToken,
       },
-    });
+    });  
+    console.log('existingToken')
 
 
 
     if (!existingToken || !existingToken.isValid) {
       return null;
+      
     }
 
-
-    attachCookiesToResponse({
+console.log('(!existingToken || !existingToken.isValid)')
+     attachCookiesToResponse({
       user: payload.user,
       refreshToken: existingToken?.refreshToken,
     });
 
+    console.log("payload")
+    console.log( payload)
 
     return payload.user;
   } catch (error) {
+    console.log(error)
     return null;
   }
 };

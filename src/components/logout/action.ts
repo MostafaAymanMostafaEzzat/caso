@@ -20,7 +20,6 @@ export async function SignOut(user: {userId:string, role : string}){
       expires: new Date(Date.now()),
     });
 
-    redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}`)
 
 
   }
