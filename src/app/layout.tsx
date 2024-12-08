@@ -4,7 +4,7 @@ import "./globals.css";
 import Providers from '@/components/Providers'
 
 import { Toaster } from "@/components/ui/toaster";
-// import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn('w-[100vw]',recursive.className)}>
       
-        {/* <Navbar/> */}
+        <Navbar/>
       <main className=' flex flex-col  min-h-[calc(100vh-3.5rem-1px)] '>
         <div className='flex  flex-col flex-1 '>
         <Providers> {children} </Providers>
