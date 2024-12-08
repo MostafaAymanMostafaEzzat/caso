@@ -10,7 +10,7 @@ import { buttonVariants } from "./button";
 
 export default  function Navbar() {
 
-const auth = useAuthOnClient()
+// const auth = useAuthOnClient()
 
 
   return (
@@ -22,7 +22,7 @@ const auth = useAuthOnClient()
             <span className="text-green-600">cobra</span>
           </h1>
 
-          <div className="flex gap-5 items-center">
+          {/* <div className="flex gap-5 items-center">
             {auth ? (
               <div className="flex items-center gap-2">
               <LogoutButton user={auth} />
@@ -60,7 +60,7 @@ const auth = useAuthOnClient()
               </Link>
               <span className="absolute inset-y-0 w-[1px] bg-zinc-200 -left-6 hidden sm:block" />
             </div>
-          </div>
+          </div> */}
         </div>
       </MaxWidthWithWrapper>
     </div>
