@@ -6,11 +6,46 @@ import { LogoutButton } from "./logout/client";
 import AuthButton from "./authButton";
 import useAuthOnClient from "./customHooks/authenticateOnClient";
 import { buttonVariants } from "./button";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 
 
 export default  function Navbar() {
 
-// const auth = useAuthOnClient()
+  console.log("start")
+const [auth,setAuth] = useState<null | { userId: string; role: string;}>(null);
+const x = useRef(true)
+console.log(x)
+
+  useEffect(()=>{
+
+  async function authenticate (){
+    try {
+      const user = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/authenticateUser`);
+        console.log("user")
+  
+        console.log(user.data.user)
+        if (JSON.stringify(user.data.user) !== JSON.stringify(auth)) {
+          setAuth(user.data.user);
+          x.current = false;
+          console.log("Authenticated user:", user);
+        }
+    } catch (error) {
+      console.error("Authentication error");
+      if (auth !== null) {
+        setAuth(null); // Clear state if there's an error
+        x.current = false;
+
+      }
+    }
+  }
+  if(x.current){
+    console.log("if(x){}"); console.log(x)
+  authenticate();
+}else{ console.log("x.current"); console.log(x);x.current= true}
+  })
+
 
 
   return (
@@ -22,7 +57,7 @@ export default  function Navbar() {
             <span className="text-green-600">cobra</span>
           </h1>
 
-          {/* <div className="flex gap-5 items-center">
+          <div className="flex gap-5 items-center">
             {auth ? (
               <div className="flex items-center gap-2">
               <LogoutButton user={auth} />
@@ -60,7 +95,7 @@ export default  function Navbar() {
               </Link>
               <span className="absolute inset-y-0 w-[1px] bg-zinc-200 -left-6 hidden sm:block" />
             </div>
-          </div> */}
+          </div>
         </div>
       </MaxWidthWithWrapper>
     </div>
