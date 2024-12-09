@@ -1,3 +1,4 @@
+import { authenticateUser } from "@/middleware/authenticateUser";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
@@ -11,13 +12,11 @@ console.log(x)
 
   async function authenticate (){
     try {
-      const user = await axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/authenticateUser`);
-        console.log("user")
+      const user = await authenticateUser()
   
-        console.log(user.data.user)
-        if (JSON.stringify(user.data.user) !== JSON.stringify(auth)) {
-          setAuth(user.data.user);
+        console.log(user)
+        if (JSON.stringify(user) !== JSON.stringify(auth)) {
+          setAuth(user);
           x.current = false;
           console.log("Authenticated user:", user);
         }
