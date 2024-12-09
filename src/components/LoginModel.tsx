@@ -1,3 +1,4 @@
+'use client'
 import {
   Dialog,
   DialogContent,
@@ -9,6 +10,7 @@ import {
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import AuthButton from "./authButton";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginModel({
     isOpen,
@@ -17,6 +19,7 @@ export default function LoginModel({
     isOpen: boolean
     setIsOpen: Dispatch<SetStateAction<boolean>>
   }) {
+    const searchParams = useSearchParams()
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogContent >
@@ -39,8 +42,8 @@ export default function LoginModel({
           </DialogDescription>
         </DialogHeader>
         <div className='grid grid-cols-2 gap-6 divide-x divide-gray-200'>
-        <AuthButton to="Login"/>
-        <AuthButton to="Register"/>
+        <AuthButton to="Login" searchParams={searchParams}/>
+        <AuthButton to="Register" searchParams={searchParams}/>
         </div>
       </DialogContent>
     </Dialog>
