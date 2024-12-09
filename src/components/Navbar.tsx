@@ -14,8 +14,8 @@ export default  function Navbar() {
 
   console.log("start")
 const [auth,setAuth] = useState<null | { userId: string; role: string;}>(null);
-const x = useRef(true)
-console.log(x)
+// const x = useRef(true)
+// console.log(x)
 
 //   useEffect(()=>{
 
