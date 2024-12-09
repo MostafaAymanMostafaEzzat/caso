@@ -3,14 +3,15 @@
 
 import { Button } from "./button";
 import { returnAndStartFromTheEnd } from "./returnAndStartFromTheEnd";
-import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation"
 
-export default function AuthButton({to,searchParams}:{to :string,searchParams:ReadonlyURLSearchParams}){
+export default function AuthButton({to}:{to :string}){
     const router = useRouter()
     const cuurentRoute = usePathname()
+    const searchParams = useSearchParams()
 
-
+    console.log(searchParams.values())
 
 return(
 
