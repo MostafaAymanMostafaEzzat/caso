@@ -9,8 +9,11 @@ import { buttonVariants } from "./button";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default  function Navbar() {
+  const searchParams = useSearchParams();
+  console.log(searchParams.values())
 
 
 const auth =useAuthOnClient()
@@ -45,12 +48,12 @@ const auth =useAuthOnClient()
             ) : (
               <div className="flex items-center gap-2">
                 {" "}
-                <Suspense fallback={<div>Loading...</div>}>
-                <AuthButton to='Register' />
+ 
+                <AuthButton to='Register' searchParams={searchParams} />
 
 
-                  <AuthButton to='Login'/>
-                  </Suspense>
+                  <AuthButton to='Login' searchParams={searchParams}/>
+
               </div>
             )}
             <div className="text-center  relative ml-4">
