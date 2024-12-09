@@ -8,43 +8,12 @@ import useAuthOnClient from "./customHooks/authenticateOnClient";
 import { buttonVariants } from "./button";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-
+import { Suspense } from "react";
 
 export default  function Navbar() {
 
-  console.log("start")
-const [auth,setAuth] = useState<null | { userId: string; role: string;}>(null);
-// const x = useRef(true)
-// console.log(x)
 
-//   useEffect(()=>{
-
-//   async function authenticate (){
-//     try {
-//       const user = await axios.get(
-//         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/authenticateUser`);
-//         console.log("user")
-  
-//         console.log(user.data.user)
-//         if (JSON.stringify(user.data.user) !== JSON.stringify(auth)) {
-//           setAuth(user.data.user);
-//           x.current = false;
-//           console.log("Authenticated user:", user);
-//         }
-//     } catch (error) {
-//       console.error("Authentication error");
-//       if (auth !== null) {
-//         setAuth(null); // Clear state if there's an error
-//         x.current = false;
-
-//       }
-//     }
-//   }
-//   if(x.current){
-//     console.log("if(x){}"); console.log(x)
-//   authenticate();
-// }else{ console.log("x.current"); console.log(x);x.current= true}
-//   })
+const auth =useAuthOnClient()
 
 
 
@@ -76,11 +45,12 @@ const [auth,setAuth] = useState<null | { userId: string; role: string;}>(null);
             ) : (
               <div className="flex items-center gap-2">
                 {" "}
-                
+                <Suspense fallback={<div>Loading...</div>}>
                 <AuthButton to='Register' />
 
 
                   <AuthButton to='Login'/>
+                  </Suspense>
               </div>
             )}
             <div className="text-center  relative ml-4">

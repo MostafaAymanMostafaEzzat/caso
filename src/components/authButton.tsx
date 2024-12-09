@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense } from "react";
+
 import { Button } from "./button";
 import { returnAndStartFromTheEnd } from "./returnAndStartFromTheEnd";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,7 +14,7 @@ export default function AuthButton({to}:{to :string}){
     console.log(searchParams.values())
 
 return(
-  <Suspense fallback={<div>Loading...</div>}>
+
         <Button
     variant='ghost'
 size='sm'
@@ -25,6 +25,6 @@ onClick={()=>{
 >
 {to}
 </Button>
-    </Suspense>
+
 )
 }
