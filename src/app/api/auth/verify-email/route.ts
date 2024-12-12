@@ -7,6 +7,7 @@ export async function POST(req: Request): Promise<Response> {
   const { email_, verificationToken } = request;
   const email =decodeURIComponent(email_)
 console.log('1')
+console.log(email_)
 console.log(email)
   if (!email || !verificationToken) {
 console.log('2')
