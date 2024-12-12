@@ -46,7 +46,8 @@ export async function POST(req: Request): Promise<Response> {
   const passwordHashed = await bcrypt.hash(password, salt);
 
   const verificationToken = crypto.randomBytes(40).toString("hex");
-
+console.log('verificationToken')
+console.log(verificationToken)
   const user = await db.user.create({
     data: {
       email: email,
