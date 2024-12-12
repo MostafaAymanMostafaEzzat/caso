@@ -4,12 +4,12 @@ import { CustomError } from "@/errors";
 export async function POST(req: Request): Promise<Response> {
  try {
   const request = await req.json();
-  const { email_, verificationToken } = request;
-  const email =decodeURIComponent(email_)
+  const { email, verificationToken } = request;
+  const email_ =decodeURIComponent(email)
 console.log('1')
-console.log(email_)
 console.log(email)
-  if (!email || !verificationToken) {
+console.log(email_)
+  if (!email_ || !verificationToken) {
 console.log('2')
 
     return  CustomError.BadRequestError('somthing went wrong')
@@ -17,7 +17,7 @@ console.log('2')
   }
   const user = await db.user.findFirst({
     where: {
-      email: email,
+      email: email_,
     },
   });
 console.log('3')
@@ -37,7 +37,7 @@ console.log('5')
 
   await db.user.update({
     where: {
-      email: email,
+      email: email_,
     },
     data: {
       isVerified: true,
