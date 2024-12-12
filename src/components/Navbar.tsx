@@ -45,7 +45,7 @@ const auth =useAuthOnClient()
             ) : (
               <div className="flex items-center gap-2">
                 {" "}
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<></>}>
                 <AuthButton to='Register' />
 
 
