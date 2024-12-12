@@ -30,7 +30,7 @@ const auth =useAuthOnClient()
             {auth ? (
               <div className="flex items-center gap-2">
               <LogoutButton user={auth} />
-                {auth?.role ? (
+                {auth?.role  === 'admin' ?(
                   <Link
                     href="/dashboard"
                     className={buttonVariants({
