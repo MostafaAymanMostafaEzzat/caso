@@ -57,7 +57,7 @@ export default function DesignPreview({
 
   const handleCheckout = async () => {
     const user = await authenticateUser()
-    if (1) {
+    if (user) {
       // create payment session
       createPaymentSession()
     } else {
