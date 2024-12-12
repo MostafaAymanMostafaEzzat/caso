@@ -11,6 +11,8 @@ export default async function ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   try {
+    console.log('searchParams')
+    console.log(searchParams)
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/verify-email`,searchParams
     );
