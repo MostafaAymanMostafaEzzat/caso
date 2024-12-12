@@ -57,6 +57,9 @@ export async function POST(req: Request): Promise<Response> {
   });
 
   //send Email
+console.log('sendVerificationEmail')
+console.log(user)
+  
   await sendVerificationEmail({
     email: user.email,
     verificationToken,

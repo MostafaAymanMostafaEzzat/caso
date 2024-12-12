@@ -7,7 +7,7 @@ console.log(email)
 const URL =`${origin}/auth/verify-email?verificationToken=${verificationToken}&email=${email}`
 const message=`<p>Please confirm your email by clicking on the following link : 
 <a href="${URL}">Verify Email</a> </p>`;
-
+console.log(URL)
 return sendEmail({
      to:email,
      subject:'Email Confirmation',
