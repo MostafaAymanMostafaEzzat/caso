@@ -5,22 +5,32 @@ export async function POST(req: Request): Promise<Response> {
  try {
   const request = await req.json();
   const { email, verificationToken } = request;
-
+console.log('1')
   if (!email || !verificationToken) {
+console.log('2')
+
     return  CustomError.BadRequestError('somthing went wrong')
+    
   }
   const user = await db.user.findFirst({
     where: {
       email: email,
     },
   });
+console.log('3')
+
 
   if (!user) {
+console.log('4')
+
     return CustomError.UnauthenticatedError('Verification Failed');
   }
+console.log('5')
+
   if (verificationToken !== user.verificationToken) {
     return CustomError.UnauthenticatedError('Verification Failed');
   }
+  console.log('6')
 
   await db.user.update({
     where: {
@@ -32,9 +42,13 @@ export async function POST(req: Request): Promise<Response> {
       verificationToken: "",
     },
   });
+console.log('7')
+  
 
   return Response.json({ msg: "Email Verified" }, { status: 200 });
  } catch (error) {
+console.log('8')
+
   return  CustomError.BadRequestError('somthing went wrong')
  }
 }
