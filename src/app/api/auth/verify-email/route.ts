@@ -4,7 +4,8 @@ import { CustomError } from "@/errors";
 export async function POST(req: Request): Promise<Response> {
  try {
   const request = await req.json();
-  const { email, verificationToken } = request;
+  const { email_, verificationToken } = request;
+  const email =decodeURIComponent(email_)
 console.log('1')
   if (!email || !verificationToken) {
 console.log('2')
