@@ -10,8 +10,8 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Suspense } from "react";
 
-
 export default  function Navbar() {
+
 
 const auth =useAuthOnClient()
 
@@ -45,12 +45,12 @@ const auth =useAuthOnClient()
             ) : (
               <div className="flex items-center gap-2">
                 {" "}
-                <Suspense fallback={<></>}>
+                <Suspense fallback={<div>Loading...</div>}>
                 <AuthButton to='Register' />
 
 
                   <AuthButton to='Login'/>
-                  </Suspense>
+                      </Suspense>
               </div>
             )}
             <div className="text-center  relative ml-4">

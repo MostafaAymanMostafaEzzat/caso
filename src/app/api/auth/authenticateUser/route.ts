@@ -10,7 +10,7 @@ export async function GET(req:Request) {
   if (!refreshToken) {
     console.log(req)
     console.log("refreshToken 1")
-    return  CustomError.BadRequestError('somthing went wrong')
+    return  CustomError.UnauthenticatedError('You are not unauthenticated ')
   }
   try {
     if (accessToken) {
@@ -27,16 +27,14 @@ export async function GET(req:Request) {
         refreshToken: payload?.refreshToken,
       },
     });
-    console.log('existingToken')
-
 
 
     if (!existingToken || !existingToken.isValid) {
-      return  CustomError.BadRequestError('somthing went wrong')
+      return  CustomError.UnauthenticatedError('You are not unauthenticated ')
       
     }
 
-console.log('(!existingToken || !existingToken.isValid)')
+
     await attachCookiesToResponse({
       user: payload.user,
       refreshToken: existingToken?.refreshToken,
@@ -49,7 +47,7 @@ console.log('(!existingToken || !existingToken.isValid)')
 
   } catch (error) {
     console.log(error)
-    return  CustomError.BadRequestError('somthing went wrong')
+    return  CustomError.UnauthenticatedError('You are not unauthenticated ')
   }
   
   }
