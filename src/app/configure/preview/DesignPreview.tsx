@@ -149,7 +149,7 @@ export default function DesignPreview({
             <div className="font-semibold" >{formatPrice(totalPrice / 100)}</div>
           </div>
           <div className="flex justify-center md:justify-end mt-8 py-10">
-            <Button className="w-44" onClick={handleCheckout}>
+            <Button isLoading={isPending} disabled={isPending} loadingText="check out" className="w-44" onClick={handleCheckout}>
                 check out <ArrowRight />
             </Button>
           </div>

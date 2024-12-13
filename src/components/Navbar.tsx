@@ -22,8 +22,10 @@ const auth =useAuthOnClient()
       <MaxWidthWithWrapper>
         <div className="flex justify-between items-center">
           <h1 className="font-bold text-3xl text-zinc-950/85">
-            case
-            <span className="text-green-600">cobra</span>
+              <Link href='/'>
+              case
+              <span className="text-green-600">cobra</span>
+              </Link>
           </h1>
 
           <div className="flex gap-5 items-center">

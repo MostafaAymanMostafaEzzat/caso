@@ -67,7 +67,7 @@ export default function DesignOflient({
   });
   const {isUploading,startUpload} = useUploadThing('imageUploader')
   const { toast } = useToast()
-  const {mutate}= useMutation({
+  const {mutate ,isPending}= useMutation({
     
     mutationFn : async (arg:updateDataConfig)=>{
       await Promise.all([saveConfiguration(),updateConfig(arg)])
@@ -266,7 +266,7 @@ export default function DesignOflient({
                         key={model.value}
                       >
                         <Check
-                          className={cn("w-4 h-4 mr-2  ", {
+                          className={cn("w-4 h-4 mr-2 ", {
                             invisible: !(options.model === model),
                           })}
                         />
@@ -323,6 +323,9 @@ export default function DesignOflient({
               )}
             </div>
             <Button
+            isLoading={isPending}
+            loadingText="Saving"
+            disabled={isPending}
                 onClick={() =>
                   mutate({
                     configId,

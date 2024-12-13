@@ -15,27 +15,36 @@ export default function () {
   const router = useRouter()
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [Loading,setLoadin] = useState(false)
+  console.log('Loading')
+  console.log(Loading)
+
   async function login(e: FormEvent<HTMLButtonElement>) {
+    setLoadin(true)
     e.preventDefault();
     const user = {
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
     };
     try {
+
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`,user
       );
+    setLoadin(false)
       
       router.push( localStorage.getItem('returnedURL') || `${process.env.NEXT_PUBLIC_SERVER_URL}`)
       router.refresh()
     } catch (error : any) {
+    setLoadin(false)
+
       console.log(error);
-
-
-      toast({
-        title: error.response?.data?.message,
-        variant: "destructive",
-      });
+      const errorMessage =
+      error.response?.data?.message || "An unexpected error occurred.";
+    toast({
+      title: errorMessage,
+      variant: "destructive",
+    });
     }
 
   }
@@ -60,6 +69,9 @@ export default function () {
           onClick={(e) => {
             login(e);
           }}
+          isLoading= {Loading}
+          loadingText="Loading"
+          disabled={Loading}
         >
           {" "}
           Login

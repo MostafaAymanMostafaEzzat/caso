@@ -25,17 +25,15 @@ export default function () {
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/register`,
         user
       );
-      console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-      console.log(res);
+
       setIsRigisterd(true)
     } catch (error: any) {
-      console.log(error);
-      console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-
-      toast({
-        title: error.response.data.message,
-        variant: "destructive",
-      });
+      const errorMessage =
+      error.response?.data?.message || "An unexpected error occurred.";
+    toast({
+      title: errorMessage,
+      variant: "destructive",
+    });
     }
   };
   return (

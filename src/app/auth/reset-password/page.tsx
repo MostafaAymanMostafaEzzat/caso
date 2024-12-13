@@ -8,7 +8,7 @@ import Link from "next/link"
 import { FormEvent, Suspense, useState } from "react"
 
 
-export default async function ({
+export default function ({
     searchParams,
   }: {
     searchParams: { [key: string]: string | string[] | undefined }
@@ -36,10 +36,12 @@ try {
     const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/resetPassword`,user)
     setIsReset(true)
 } catch (error : any) {
-    toast({
-        title: error.response.data.message,
-        variant: "destructive",
-      });
+    const errorMessage =
+    error.response?.data?.message || "An unexpected error occurred.";
+  toast({
+    title: errorMessage,
+    variant: "destructive",
+  });
 
 }
 
