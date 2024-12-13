@@ -5,7 +5,7 @@ import { error } from "console";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default async function ({
+export default async function VerifyEmail({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
