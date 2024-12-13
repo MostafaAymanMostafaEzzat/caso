@@ -21,10 +21,14 @@ import { db } from "@/db";
 import { formatPrice } from "@/lib/utils";
 import { authenticateUser_ServerComponent } from "@/middleware/authenticateUser_ServerComponent";
 import StatusDropdown from "./StatusDropdown";
+import { notFound } from "next/navigation";
 
 
 const Page = async () => {
   const user = await authenticateUser_ServerComponent();
+  if(!user || user.role !== 'admin' ){
+      return notFound()
+  }
   const orders = await db.order.findMany({
     where: {
       isPaid:true,
